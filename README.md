@@ -12,7 +12,9 @@ This repo contains an XCode Project for a simple Sencha Touch 2.3.1 app.  It is 
 3. Click on any of the images.  You should get a popup confirming that you are about to navigate to an external link and would you like to open your native browser.  This is the desired behaviour when you click on an image (they're all the same link by the way)
 4. Now, flick the screen to scroll it and while it's still scrolling, tap the screen.  It may take a few tries, but you should eventually get the undesired behaviour which is that the web page opens up within the browser itself.
 
-Note this really only manifests itself in the native app.  I'm wrapping it with Cordova 3.4.1 and using the InAppBrowser 0.4.1.  Further, the only reason I put that little confirmation popup in there was because if I didn't, sometimes the app opened the link in the browser.  The issue occurs both in the simulator and on the real device.
+*Note:* This really only manifests itself in the native app.  I'm wrapping it with Cordova 3.4.1 and using the InAppBrowser 0.4.1.  The issue occurs both in the simulator and on the real device.
+
+Further, the only reason I put that little confirmation popup in there in the first place was because if I didn't, sometimes the app opened the link in the app itself.  It's like InAppBrowser is being bypassed.
 
 Here's the relevant Sencha Touch code, at line 39344 of app.js
 
