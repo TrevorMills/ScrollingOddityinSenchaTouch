@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html manifest="" lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Scrolling Oddity in Sencha Touch</title >
+
+			
+	<style type="text/css">
+	#app-loading{
+			}
+	.x-mask.splash .x-loading-spinner{height:40px;width:40px;font-size:40px;position:absolute;top:50%;left:50%;margin-top:-20px;margin-left:-20px;}.x-mask.splash .x-mask-inner{height:100%;}	</style>
+	
+<script type="text/javascript">
+	var PACKAGED_APP = {
+		target: 'ios'
+	}
+</script>
+	
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+    	<script type="text/javascript">
+		(function(h){
+			function f(c,d){
+				document.write('<meta name="'+c+'" content="'+d+'">')
+			}
+			if("undefined"===typeof g)
+				var g=h.Ext={};
+
+			g.blink=function(c){
+				var d=c.js||[],
+					c=c.css||[],
+					b,e,a;
+				f("viewport","width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no");
+				f("apple-mobile-web-app-capable","yes");
+				f("apple-touch-fullscreen","yes");
+				b=0;
+				for(e=c.length;b<e;b++)
+					a=c[b],
+					"string"!=typeof a&&(a=a.path),
+					document.write('<link rel="stylesheet" href="'+a+'">');
+				b=0;
+				for(e=d.length;b<e;b++)
+					a=d[b],
+					"string"!=typeof a&&(a=a.path),
+					document.write('<script src="'+a+'"><\/script>')
+			}
+		})(this);
+		var blink_config = {"id":"6364d3f0f495b6ab9dcf8d3b5c6e0b01","js":[{"path":"cordova.js","remote":true,"update":"full"},{"path":"sdk2.3.1\/sencha-touch-debug.js"},{"path":"app.js","bundle":true,"update":"delta"}],"css":[{"path":"sdk2.3.1\/resources\/css-debug\/sencha-touch.css","update":"delta"},{"path":"resources\/css\/wp-app-factory-custom.css","update":"delta"},{"path":"resources\/css\/the_conference_factory.css","remote":true,"update":"full"},{"path":"resources\/css\/xcd-stylesheet.css","update":"delta","remote":true}]};
+		if (location.search.indexOf('no_cordova') != -1){
+			blink_config.js = blink_config.js.filter(function(item){
+				return item.path.indexOf('cordova') == -1;
+			});
+		}
+		Ext.blink(blink_config)
+	</script>
+		
+</head>
+<body>
+<div id="app-loading"></div>
+</body>
+</html>
