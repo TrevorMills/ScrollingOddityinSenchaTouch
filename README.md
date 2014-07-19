@@ -5,6 +5,32 @@ Demonstration of scrolling + external link issue
 
 This repo contains an XCode Project for a simple Sencha Touch 2.3.1 app.  It is meant to demonstrate an issue that I am coming up against with InAppBrowser.
 
+###Update / Resolution###
+See the Sencha Forum Threads [Cordova InAppBrowser Strangeness](http://www.sencha.com/forum/showthread.php?273944-Cordova-InAppBrowser-Strangeness) and [Links in HTML Page in Native App](http://www.sencha.com/forum/showthread.php?284954-Links-in-HTML-Page-in-Native-App).  
+
+I finally figured out a way around this.  Insead of listening for an event on the Viewport component, I'm now listening for an event on the actual body element
+
+	// Need to make sure we're only responding to a tap, not a drag.  
+	Ext.getBody().dom.addEventListener( 'mousedown', function(e){
+		var el = Ext.fly( e.target );
+		if ( el.is( 'a[target="_blank"]' ) || el.parent( 'a[target="_blank"]' ) ){
+			this.startPoint = { x : e.screenX, y: e.screenY }
+		}
+	});
+	Ext.getBody().dom.addEventListener( 'click', function(e){
+		var el = Ext.fly( e.target );
+		if ( this.startPoint ){
+			e.preventDefault();
+			if ( ( Math.abs( this.startPoint.x - e.screenX ) < 8 )
+			&&   ( Math.abs( this.startPoint.y - e.screenY ) < 8 ) ){
+			  	window.open( el.dom.href || el.parent().dom.href, "_system" );
+			}
+			delete this.startPoint;
+			return false;
+		}
+	});
+
+
 ###Steps to reproduce###
 
 1. Clone the repo
